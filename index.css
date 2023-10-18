@@ -1,0 +1,102 @@
+body {
+    margin: 0;
+    display: flex;
+    margin-left: 500px;
+}
+
+.game-container {
+    width: 500px;
+    height: 760px;
+    position: absolute;
+}
+
+.border-top {
+    width: 100%;
+    position: absolute;
+    height: 50px;
+    background-color: white;
+    z-index: 2;
+    top: -40px;
+}
+
+.border-bottom {
+    width: 100%;
+    position: absolute;
+    height: 60px;
+    background-color: white;
+    z-index: 2;
+    bottom: 0px;  
+}
+
+.border-left {
+    width: 70px;
+    position: absolute;
+    height: 100%;
+    background-color: white;
+    z-index: 2;
+    left: 430px;
+}
+
+.border-right {
+    width: 70px;
+    position: absolute;
+    height: 100%;
+    background-color: white;
+    z-index: 2;
+    left: 1000px;  
+}
+.sky {
+    background-image: url('./assets/sky.jpeg');
+    background-size: cover;
+    width: 500px;
+    height: 610px;
+    position: absolute;
+}
+
+.ground {
+    background-image: url('./assets/ground.jpeg');
+    background-size: cover; 
+    width: 500px;
+    height: 150px;
+    position: absolute; 
+    top: 580px;
+    z-index: 1;
+}
+
+.bird {
+    background-image: url('./assets/bird.png');
+    position: absolute;
+    width: 60px;
+    height: 45px;
+    z-index: 1;
+}
+
+.obstacle {
+    width: 60px;
+    height: 300px;
+    background-image: url('./assets//obstacle.png');
+    position: absolute;
+}
+
+.topObstacle {
+    width: 60px;
+    height: 400px;
+    transform: rotate(180deg);
+    background-image: url('./assets//obstacle.png');
+    position: absolute;
+}
+
+.scoreCard {
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    background: transparent;
+    z-index: 10;
+}
+
+.gameOver {
+    position: absolute;
+    left: 180px;
+    bottom: 300px;
+    font-weight: 600;
+}
