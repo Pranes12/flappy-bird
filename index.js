@@ -13,6 +13,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const gameOverDiv = document.querySelector(".gameOverDiv");
   const playButton = document.querySelector(".play");
   const replayButton = document.querySelector(".replay");
+  const sound = document.createElement("audio");
+  sound.src = "./assets/birdHit.wav";
+  sound.setAttribute("preload", "auto");
+  sound.setAttribute("controls", "none");
+  sound.style.display = "none";
+  document.body.appendChild(sound);
 
   let birdBottom = 150;
   let birdLeft = 220;
@@ -47,7 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const increaseScore = () => {
       score++;
       scoreDiv.innerHTML = "SCORE : " + score;
-      console.log(score);
     }
 
     const scoreInterval = setInterval(increaseScore, 1000);
@@ -104,6 +109,11 @@ document.addEventListener("DOMContentLoaded", () => {
     } 
     generateObstacles();
 
+    const birdHitSound = () => {
+      sound.play();
+      setTimeout(() => {sound.pause()},2000);
+     }
+
     const gameOver = () => {
       isGameOver = true;
       clearInterval(gameTimerId);
@@ -112,6 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setHighScore(score);
       score = 0;
       document.removeEventListener('keyup', jumpControl);
+      birdHitSound();
     }
  }
 
@@ -124,7 +135,6 @@ document.addEventListener("DOMContentLoaded", () => {
   gameOverDiv.style.display = "none";
   playGame();
  }
-
  
 playButton.addEventListener('click', playGame);
 replayButton.addEventListener('click', replay);
