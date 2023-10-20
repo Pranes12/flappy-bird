@@ -1,27 +1,49 @@
+window.addEventListener('keydown', function(e) {
+  if(e.keyCode == 32 && e.target == document.body) {
+    e.preventDefault();
+  }
+});
+
 document.addEventListener("DOMContentLoaded", () => {
-    const bird = document.querySelector(".bird");
-    const gameBoard = document.querySelector(".game-container");
-    const ground = document.querySelector(".ground");
-    const scoreDiv = document.querySelector(".score");
-    const game_over = document.querySelector(".gameOver");
+  const bird = document.querySelector(".bird");
+  const gameBoard = document.querySelector(".game-container");
+  const ground = document.querySelector(".ground");
+  const scoreDiv = document.querySelector(".score");
+  const highScoreDiv = document.querySelector(".highScore");
+  const gameOverDiv = document.querySelector(".gameOverDiv");
+  const playButton = document.querySelector(".play");
+  const replayButton = document.querySelector(".replay");
+
+  let birdBottom = 150;
+  let birdLeft = 220;
+  let gravity = 2;
+  let isGameOver = false;
+  let gap = 420 ;
+  let score = 0;
+
+  highScoreDiv.innerHTML = "HIGH SCORE : " + (localStorage.getItem("highScore") ? localStorage.getItem("highScore") : 0);
+
+  bird.style.bottom = birdBottom + "px";
+  bird.style.left = birdLeft + "px";
+
+  const playGame = () => {
     scoreDiv.innerHTML = "SCORE : " + 0;
-
-    let birdBottom = 100;
-    let birdLeft = 220;
-    let gravity = 2;
-    let isGameOver = false;
-    let gap = 420 ;
-    let score = 0;
-
-    const startGame = () => {
-    
-        if(birdBottom > 0){
-        birdBottom -= gravity
-        bird.style.bottom = birdBottom + "px";
-        bird.style.left = birdLeft + "px";
-        }
+    playButton.style.display = "none";
+    const setHighScore = (score) => {
+      const currentHighScore = localStorage.getItem("highScore");
+      if(score > currentHighScore) {
+        localStorage.setItem("highScore", score);
+        highScoreDiv.innerHTML = "HIGH SCORE : " + score;
+      }
     }
-
+    const startGame = () => {
+  
+      if(birdBottom > 0){
+      birdBottom -= gravity
+      bird.style.bottom = birdBottom + "px";
+      bird.style.left = birdLeft + "px";
+      }
+    }
     const increaseScore = () => {
       score++;
       scoreDiv.innerHTML = "SCORE : " + score;
@@ -38,8 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const jump = () => {
         if(birdBottom < 455) {
-       birdBottom += 35;
-       bird.style.bottom = birdBottom + "px";
+      birdBottom += 35;
+      bird.style.bottom = birdBottom + "px";
         }
     }
 
@@ -86,7 +108,25 @@ document.addEventListener("DOMContentLoaded", () => {
       isGameOver = true;
       clearInterval(gameTimerId);
       clearInterval(scoreInterval);
-      game_over.innerHTML = 'Game Over';
+      gameOverDiv.style.display = "flex";
+      setHighScore(score);
+      score = 0;
       document.removeEventListener('keyup', jumpControl);
     }
+ }
+
+ const replay = () => {
+  birdBottom = 150;
+  birdLeft = 220;
+  isGameOver = false;
+  bird.style.bottom = birdBottom + "px";
+  bird.style.left = birdLeft + "px";
+  gameOverDiv.style.display = "none";
+  playGame();
+ }
+
+ 
+playButton.addEventListener('click', playGame);
+replayButton.addEventListener('click', replay);
+
 })

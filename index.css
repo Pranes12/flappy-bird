@@ -63,6 +63,14 @@ body {
     z-index: 1;
 }
 
+.play {
+    position: absolute;
+    height: 70px;
+    left: 45%;
+    top: 40%;
+    cursor: pointer;
+}
+
 .bird {
     background-image: url('./assets/bird.png');
     position: absolute;
@@ -89,14 +97,29 @@ body {
 .scoreCard {
     position: absolute;
     display: flex;
-    gap: 10px;
+    flex-direction: column;
     background: transparent;
+    gap: 10px;
     z-index: 10;
+    margin-top: 15px;
 }
 
-.gameOver {
+.scoreCard h2,h3 {
+    margin: 0px;
+    margin-left: 5px;
+}
+
+.gameOverDiv {
     position: absolute;
+    display: none;
+    flex-direction: column;
+    align-items: center;
     left: 180px;
     bottom: 300px;
     font-weight: 600;
+}
+
+.replay {
+    height: 70px;
+    cursor: pointer;
 }
