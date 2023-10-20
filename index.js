@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   sound.setAttribute("preload", "auto");
   sound.setAttribute("controls", "none");
   sound.style.display = "none";
+  sound.volume = 0.3;
   document.body.appendChild(sound);
 
   let birdBottom = 150;
